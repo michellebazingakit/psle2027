@@ -105,12 +105,21 @@
   }
   .data-table tbody td{padding:9px 10px;border-bottom:1px solid #f1f1f4;vertical-align:top;}
   .data-table tbody tr:hover{background:#fafafa;}
-  .week-header-row td{
+  .week-header{
     background:#f4f0fb;color:#3f2d63;font-weight:700;font-size:11px;
-    text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;
-    border-bottom:2px solid #ddd0f5;border-top:1px solid #ddd0f5;
+    text-transform:uppercase;letter-spacing:.4px;padding:8px 12px;
+    border-radius:6px;margin:16px 0 8px 0;
   }
-  .week-header-row:hover td{background:#f4f0fb;}
+  .week-header:first-child{margin-top:0;}
+  .exam-card{
+    background:#fafafa;border:1px solid #f0f0f0;border-radius:8px;
+    padding:12px 14px;margin-bottom:8px;
+  }
+  .exam-card-top{display:flex;align-items:center;gap:6px;font-size:13.5px;margin-bottom:4px;}
+  .exam-card-top .exam-date{margin-left:auto;color:var(--text-secondary);font-size:12px;font-weight:600;}
+  .exam-task{font-size:13px;color:var(--text-primary);margin-bottom:4px;line-height:1.4;}
+  .exam-meta{font-size:11.5px;color:var(--text-secondary);margin-bottom:2px;}
+  .exam-components{font-size:12px;color:var(--text-secondary);line-height:1.5;}
   .al-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11.5px;color:#fff;}
   .al1{background:#1e8e5a;} .al2{background:#3d9c6c;} .al3{background:#6ea86f;}
   .al4{background:#c98a1c;} .al5{background:#d4711f;} .al6{background:#c0472a;}
@@ -901,23 +910,24 @@ function renderExamTable(containerId, rows){
   });
   const weekKeys = Object.keys(groups).sort();
 
-  let html = `<div class="table-scroll"><table class="data-table"><thead><tr>
-    <th>Date</th><th>Subject</th><th>Task</th><th>Duration / Marks</th><th>Components</th>
-  </tr></thead><tbody>`;
+  let html = "";
   weekKeys.forEach(wk=>{
-    html += `<tr class="week-header-row"><td colspan="5">Week of ${weekRangeLabel(wk)}</td></tr>`;
+    html += `<div class="week-header">Week of ${weekRangeLabel(wk)}</div>`;
     groups[wk].forEach(r=>{
       const k = subjectKeyFromLabel(r.subject);
-      html += `<tr>
-        <td>${fmtDate(r.date)}${r.note?`<br><span class="remark-cell">${r.note}</span>`:''}</td>
-        <td><span class="legend-dot" style="background:${COLORS[k]}"></span>${r.subject}</td>
-        <td>${r.task}</td>
-        <td>${r.duration}</td>
-        <td class="remark-cell">${r.components}</td>
-      </tr>`;
+      html += `<div class="exam-card">
+        <div class="exam-card-top">
+          <span class="legend-dot" style="background:${COLORS[k]}"></span>
+          <strong>${r.subject}</strong>
+          <span class="exam-date">${fmtDate(r.date)}</span>
+        </div>
+        <div class="exam-task">${r.task}</div>
+        <div class="exam-meta">⏱ ${r.duration}</div>
+        <div class="exam-components">${r.components}</div>
+        ${r.note?`<div class="exam-meta">${r.note}</div>`:''}
+      </div>`;
     });
   });
-  html += `</tbody></table></div>`;
   document.getElementById(containerId).innerHTML = html;
 }
 
