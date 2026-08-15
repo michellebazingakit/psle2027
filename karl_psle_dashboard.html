@@ -111,6 +111,16 @@
     border-bottom:2px solid #ddd0f5;border-top:1px solid #ddd0f5;
   }
   .week-header-row:hover td{background:#f4f0fb;}
+  .week-cell{
+    background:#f4f0fb;color:#3f2d63;font-weight:700;font-size:11px;
+    text-transform:uppercase;letter-spacing:.4px;vertical-align:middle!important;
+    border-right:2px solid #ddd0f5;white-space:nowrap;text-align:center;
+  }
+  .subject-cell{
+    font-weight:700;vertical-align:middle!important;white-space:nowrap;
+    background:#fafafa;border-right:1px solid #f1f1f4;
+  }
+  .exam-table-nested tbody tr:hover td:not(.week-cell):not(.subject-cell){background:#fafafa;}
   .al-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11.5px;color:#fff;}
   .al1{background:#1e8e5a;} .al2{background:#3d9c6c;} .al3{background:#6ea86f;}
   .al4{background:#c98a1c;} .al5{background:#d4711f;} .al6{background:#c0472a;}
@@ -298,12 +308,12 @@
     </div>
 
     <div class="card">
-      <h3>Term 3 — Weighted Assessments <span>(all in August 2026)</span></h3>
+      <h3>Term 3 — Weighted Assessments <span>(upcoming only — passed exams hidden)</span></h3>
       <div id="table-term3-wa"></div>
     </div>
 
     <div class="card">
-      <h3>Term 4 — End-of-Year Examinations <span>(September–October 2026)</span></h3>
+      <h3>Term 4 — End-of-Year Examinations <span>(September–October 2026 · grouped by subject)</span></h3>
       <div id="table-term4-eoy"></div>
     </div>
 
@@ -885,7 +895,8 @@ function weekRangeLabel(mondayStr){
   return `${fmt(start)} – ${fmt(end)}`;
 }
 
-function renderExamTable(containerId, rows){
+// Term 3 style: flat rows under a full-width week header (original layout)
+function renderExamTableFlat(containerId, rows){
   const groups = {};
   rows.forEach(r=>{
     const wk = mondayOf(r.date);
@@ -914,9 +925,48 @@ function renderExamTable(containerId, rows){
   document.getElementById(containerId).innerHTML = html;
 }
 
+// Term 4 style: grouped by subject only (no calendar-week grouping) — subject cell merges vertically
+function renderExamTableBySubject(containerId, rows){
+  const SUBJECT_ORDER = ["English","Math","Science","Chinese","HCL"];
+  const subjMap = {};
+  rows.forEach(r=>{
+    if(!subjMap[r.subject]) subjMap[r.subject] = [];
+    subjMap[r.subject].push(r);
+  });
+  // order subjects by SUBJECT_ORDER, then any leftovers alphabetically
+  const subjOrder = SUBJECT_ORDER.filter(s=>subjMap[s]).concat(
+    Object.keys(subjMap).filter(s=>!SUBJECT_ORDER.includes(s)).sort()
+  );
+
+  let html = `<div class="table-scroll"><table class="data-table exam-table-nested"><thead><tr>
+    <th>Subject</th><th>Date</th><th>Task</th><th>Duration / Marks</th><th>Components</th>
+  </tr></thead><tbody>`;
+
+  subjOrder.forEach(subj=>{
+    const subjRows = subjMap[subj].slice().sort((a,b)=>a.date.localeCompare(b.date));
+    const k = subjectKeyFromLabel(subj);
+    subjRows.forEach((r, idx)=>{
+      html += `<tr>`;
+      if(idx===0){
+        html += `<td class="subject-cell" rowspan="${subjRows.length}"><span class="legend-dot" style="background:${COLORS[k]}"></span>${subj}</td>`;
+      }
+      html += `
+        <td>${fmtDate(r.date)}${r.note?`<br><span class="remark-cell">${r.note}</span>`:''}</td>
+        <td>${r.task}</td>
+        <td>${r.duration}</td>
+        <td class="remark-cell">${r.components}</td>
+      </tr>`;
+    });
+  });
+
+  html += `</tbody></table></div>`;
+  document.getElementById(containerId).innerHTML = html;
+}
+
 function buildExamsTab(){
-  renderExamTable("table-term3-wa", TERM3_WA);
-  renderExamTable("table-term4-eoy", TERM4_EOY);
+  const upcomingTerm3WA = TERM3_WA.filter(r=>daysUntil(r.date)>=0);
+  renderExamTableFlat("table-term3-wa", upcomingTerm3WA);
+  renderExamTableBySubject("table-term4-eoy", TERM4_EOY);
 
   let keyHtml = `<div class="table-scroll"><table class="data-table"><thead><tr><th>Date</th><th>Event</th></tr></thead><tbody>`;
   KEY_DATES.forEach(k=>{
