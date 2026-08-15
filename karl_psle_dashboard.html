@@ -154,9 +154,11 @@
   .cal-cell.is-today{outline:2px solid #7a1f2b;outline-offset:1px;}
   .cal-cell.holiday{background:#fff3d6;border-color:#f0d38a;}
   .cal-cell.vacation{background:#e6f4ea;border-color:#a8d6b8;}
+  .cal-cell.travel{background:#ffe1b8;border-color:#eeab54;}
   .legend-swatch{display:inline-block;width:12px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle;}
   .holiday-swatch{background:#fff3d6;border:1px solid #f0d38a;}
   .vacation-swatch{background:#e6f4ea;border:1px solid #a8d6b8;}
+  .travel-swatch{background:#ffe1b8;border:1px solid #eeab54;}
   .cal-dots{display:flex;gap:2px;margin-top:1px;flex-wrap:wrap;justify-content:center;}
   .cal-dot{width:6px;height:6px;border-radius:50%;}
   .upcoming-list{margin-top:4px;}
@@ -417,7 +419,49 @@ const HOLIDAYS = [
   {date:"2026-09-11", label:"School Vacation (Term III/IV break)", type:"vacation"},
   {date:"2026-09-12", label:"School Vacation (Term III/IV break)", type:"vacation"},
   {date:"2026-09-13", label:"School Vacation (Term III/IV break)", type:"vacation"},
-  {date:"2026-10-02", label:"Children's Day (Primary schools)", type:"holiday"}
+  {date:"2026-10-02", label:"Children's Day (Primary schools)", type:"holiday"},
+  {date:"2026-11-09", label:"Deepavali (observed — actual date Sun 8 Nov)", type:"holiday"},
+  {date:"2026-11-21", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-11-22", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-11-23", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-11-24", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-11-25", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-11-26", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-11-27", label:"Family travel — SIN→PEK (CA976, depart 0930)", type:"travel"},
+  {date:"2026-11-28", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-11-29", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-11-30", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-12-01", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-12-02", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-12-03", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-12-04", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-12-05", label:"Family travel — Beijing", type:"travel"},
+  {date:"2026-12-06", label:"Family travel — PEK→SIN (CA969, arrive 2155)", type:"travel"},
+  {date:"2026-12-07", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-08", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-09", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-10", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-11", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-12", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-13", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-14", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-15", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-16", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-17", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-18", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-19", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-20", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-21", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-22", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-23", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-24", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-25", label:"Christmas Day / Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-26", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-27", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-28", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-29", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-30", label:"Year-End School Vacation", type:"vacation"},
+  {date:"2026-12-31", label:"Year-End School Vacation", type:"vacation"}
 ];
 function holidayFor(dateStr){ return HOLIDAYS.find(h=>h.date===dateStr); }
 
@@ -446,12 +490,12 @@ function renderActionCenter(){
   // Legend
   document.getElementById("cal-legend").innerHTML = Object.keys(SUBJECT_LABEL).map(k=>
     `<span><span class="legend-dot" style="background:${COLORS[k]}"></span>${SUBJECT_LABEL[k]}</span>`
-  ).join("") + `<span><span class="legend-swatch holiday-swatch"></span>Public/School Holiday</span><span><span class="legend-swatch vacation-swatch"></span>School Vacation</span><span><span class="legend-swatch" style="background:${TUTOR_COLORS.A};border:1px solid #a8c8ee;"></span>Science/Math Tutor</span><span><span class="legend-swatch" style="background:${TUTOR_COLORS.B};border:1px solid #eeaac8;"></span>English Tutor (Comp/Paper)</span>`;
+  ).join("") + `<span><span class="legend-swatch holiday-swatch"></span>Public/School Holiday</span><span><span class="legend-swatch vacation-swatch"></span>School Vacation</span><span><span class="legend-swatch travel-swatch"></span>Family Travel</span><span><span class="legend-swatch" style="background:${TUTOR_COLORS.A};border:1px solid #a8c8ee;"></span>Science/Math Tutor</span><span><span class="legend-swatch" style="background:${TUTOR_COLORS.B};border:1px solid #eeaac8;"></span>English Tutor (Comp/Paper)</span>`;
 
   const upcoming = EXAMS.filter(e=>daysUntil(e.date)>=0).sort((a,b)=>a.date.localeCompare(b.date));
 
-  // Calendars for Aug, Sep, Oct 2026
-  const monthsToShow = [[2026,7],[2026,8]]; // month is 0-indexed: 7=Aug,8=Sep
+  // Calendars for Aug–Dec 2026
+  const monthsToShow = [[2026,7],[2026,8],[2026,9],[2026,10],[2026,11]]; // month is 0-indexed: 7=Aug...11=Dec
   const calContainer = document.getElementById("cal-months");
   calContainer.innerHTML = "";
   monthsToShow.forEach(([year,month])=>{
@@ -492,7 +536,7 @@ function buildMonthCalendar(year, month){
     let bgStyle = "";
     let cellClass = "";
     if(holiday){
-      cellClass = holiday.type==="vacation" ? "vacation" : "holiday";
+      cellClass = holiday.type==="vacation" ? "vacation" : holiday.type==="travel" ? "travel" : "holiday";
     } else if(dayTutors.length){
       bgStyle = `style="background:${TUTOR_COLORS[dayTutors[0].colorGroup]};"`;
     }
@@ -869,7 +913,13 @@ const KEY_DATES = [
   {date:"2026-09-05", label:"School Vacation begins (Term III → IV break)"},
   {date:"2026-09-13", label:"School Vacation ends"},
   {date:"2026-09-14", label:"Term IV begins"},
-  {date:"2026-10-02", label:"Children's Day (Primary schools)"}
+  {date:"2026-10-02", label:"Children's Day (Primary schools)"},
+  {date:"2026-10-27", label:"Last Term 4 exam paper (HCL) — travel window opens after this"},
+  {date:"2026-11-09", label:"Deepavali (observed) — actual date is Sun 8 Nov"},
+  {date:"2026-11-20", label:"Last day of school year (Term IV ends)"},
+  {date:"2026-11-21", label:"Year-End School Vacation begins (runs through 31 Dec)"},
+  {date:"2026-11-27", label:"Family travel begins — SIN→PEK, CA976 (depart 0930, arrive 1545)"},
+  {date:"2026-12-06", label:"Family travel ends — PEK→SIN, CA969 (depart 1545, arrive 2155)"}
 ];
 
 function subjectKeyFromLabel(label){
