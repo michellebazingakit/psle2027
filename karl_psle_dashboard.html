@@ -105,21 +105,12 @@
   }
   .data-table tbody td{padding:9px 10px;border-bottom:1px solid #f1f1f4;vertical-align:top;}
   .data-table tbody tr:hover{background:#fafafa;}
-  .week-header{
+  .week-header-row td{
     background:#f4f0fb;color:#3f2d63;font-weight:700;font-size:11px;
-    text-transform:uppercase;letter-spacing:.4px;padding:8px 12px;
-    border-radius:6px;margin:16px 0 8px 0;
+    text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;
+    border-bottom:2px solid #ddd0f5;border-top:1px solid #ddd0f5;
   }
-  .week-header:first-child{margin-top:0;}
-  .exam-card{
-    background:#fafafa;border:1px solid #f0f0f0;border-radius:8px;
-    padding:12px 14px;margin-bottom:8px;
-  }
-  .exam-card-top{display:flex;align-items:center;gap:6px;font-size:13.5px;margin-bottom:4px;}
-  .exam-card-top .exam-date{margin-left:auto;color:var(--text-secondary);font-size:12px;font-weight:600;}
-  .exam-task{font-size:13px;color:var(--text-primary);margin-bottom:4px;line-height:1.4;}
-  .exam-meta{font-size:11.5px;color:var(--text-secondary);margin-bottom:2px;}
-  .exam-components{font-size:12px;color:var(--text-secondary);line-height:1.5;}
+  .week-header-row:hover td{background:#f4f0fb;}
   .al-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11.5px;color:#fff;}
   .al1{background:#1e8e5a;} .al2{background:#3d9c6c;} .al3{background:#6ea86f;}
   .al4{background:#c98a1c;} .al5{background:#d4711f;} .al6{background:#c0472a;}
@@ -229,9 +220,11 @@
   <!-- ENGLISH -->
   <div class="page" id="page-english">
     <div class="note-box">
-      <strong>Note:</strong> The May 2026 result is the Term 2 Weighted Assessment — a full paper covering Grammar MCQ, Editing, Comprehension Cloze, and Synthesis &amp; Transformation (not a Comprehension-only check as first thought). <strong>Synthesis &amp; Transformation scored 0/6</strong> — the clearest, most fixable gap right now. March's 70% was Comprehension-only and isn't directly comparable.
+      <strong>Latest:</strong> Term 3 WA (4 Aug 2026) — Language Use &amp; Comprehension — <strong>22/30 (73.3%, AL5)</strong>: Grammar MCQ 8/10 (80%), Comprehension 14/20 (70%). This is a step up from May's AL6, though still short of a full recovery — the actual paper hasn't been reviewed yet, so this is component-level only until it's uploaded for a proper error analysis.
       <br><br>
-      <strong>Encouraging context:</strong> Karl's Cambridge KET (external, standardised) results show real strength in general English — CEFR B1, Pass at Grade A (Oct 2024), with a perfect Speaking score both sittings. This suggests the PSLE-score gap is less about core English ability and more about unfamiliarity with PSLE-specific formats (Synthesis &amp; Transformation, structured comprehension) — a learnable skill, not a language deficit.
+      <strong>Note:</strong> The May 2026 result was the Term 2 Weighted Assessment — a full paper covering Grammar MCQ, Editing, Comprehension Cloze, and Synthesis &amp; Transformation. <strong>Synthesis &amp; Transformation scored 0/6</strong> — the clearest, most fixable gap identified so far. March's 70% was Comprehension-only and isn't directly comparable.
+      <br><br>
+      <strong>Encouraging context:</strong> Karl's Cambridge KET (external, standardised) results show real strength in general English — CEFR B1, Pass at Grade A (Oct 2024), with a perfect Speaking score both sittings. This suggests the PSLE-score gap is less about core English ability and more about unfamiliarity with PSLE-specific formats (Synthesis &amp; Transformation, structured comprehension) — a learnable skill, not a language deficit. The Term 3 result is a small step in the right direction, but Comprehension is still at 70% (Fair band) — the fuller picture will come once the paper itself is reviewed.
     </div>
     <div class="kpi-row" id="eng-kpis"></div>
     <div class="grid-2">
@@ -314,15 +307,9 @@
       <div id="table-term4-eoy"></div>
     </div>
 
-    <div class="grid-2">
-      <div class="card">
-        <h3>Key Non-Exam Dates</h3>
-        <div id="table-key-dates"></div>
-      </div>
-      <div class="card">
-        <h3>Reminders &amp; Policies <span>(Annex B)</span></h3>
-        <ul id="exam-policy-list" style="font-size:12.8px;line-height:1.7;padding-left:20px;margin:0;color:var(--text-primary);"></ul>
-      </div>
+    <div class="card">
+      <h3>Key Non-Exam Dates</h3>
+      <div id="table-key-dates"></div>
     </div>
   </div>
 
@@ -331,7 +318,7 @@
     <span class="band-badge band-good">Band</span> = component-only score (Comprehension, Composition, etc.) &nbsp;·&nbsp;
     Class rank not yet available from school
   </div>
-  <div class="footer">Data updated to May 2026 (P5 Term 2) · Add new terms by editing the DATA array in this file</div>
+  <div class="footer">Data updated to Aug 2026 (P5 Term 3 WA — English) · Add new terms by editing the DATA array in this file</div>
 </div>
 
 <script>
@@ -355,11 +342,15 @@ const DATA = [
   {date:"2026-05", term:"P5 T2", subject:"Chinese", domain:null, score:96, full:100, al:1, remark:"Official Semester 1 report figure (Holistic Development Profile, 22 May 2026) — composite across components assessed so far."},
   {date:"2026-05", term:"P5 T2", subject:"HCL", domain:"Comprehension", score:21, full:44, al:6, remark:"Matches official Sem 1 report (48%)."},
   {date:"2026-05", term:"P5 T2", subject:"Math", domain:null, score:28, full:40, al:5, remark:"Section A: 10/10 · B: 14/16 · C: 4/14 — Section C (word problems) is the clear time/complexity gap, not fundamentals."},
-  {date:"2026-05", term:"P5 T2", subject:"Science", domain:null, score:34.5, full:40, al:2, remark:"MCQ 26/30 · Structured 8.5/10. 14th percentile in class. Matches official Sem 1 report (86%)."}
+  {date:"2026-05", term:"P5 T2", subject:"Science", domain:null, score:34.5, full:40, al:2, remark:"MCQ 26/30 · Structured 8.5/10. 14th percentile in class. Matches official Sem 1 report (86%)."},
+
+  {date:"2026-08", term:"P5 T3", subject:"English", domain:null, score:22, full:30, al:5, remark:"Term 3 WA — Language Use & Comprehension (4 Aug 2026): Grammar MCQ 8/10, Comprehension 14/20. Full paper not yet uploaded for detailed error analysis. First improvement since March: AL6→AL5."},
+  {date:"2026-08", term:"P5 T3", subject:"English", domain:"Comprehension", score:14, full:20, al:null, remark:"70% — same raw % as the March check-in, but this time within a full Term WA rather than standalone."},
+  {date:"2026-08", term:"P5 T3", subject:"English", domain:"Grammar MCQ", score:8, full:10, al:null, remark:"80% — strongest component on this paper."}
 ];
 
-const TERM_ORDER = ["2025-10","2026-03","2026-05"];
-const TERM_LABELS = {"2025-10":"P4 T4 (Oct '25)","2026-03":"P5 T1 (Mar '26)","2026-05":"P5 T2 (May '26)"};
+const TERM_ORDER = ["2025-10","2026-03","2026-05","2026-08"];
+const TERM_LABELS = {"2025-10":"P4 T4 (Oct '25)","2026-03":"P5 T1 (Mar '26)","2026-05":"P5 T2 (May '26)","2026-08":"P5 T3 (Aug '26)"};
 const COLORS = {eng:"#b6472a", math:"#2f5f9e", sci:"#2f7d5a", chi:"#a3792b", hcl:"#8a6fb3", agg:"#5c3d99"};
 
 // Section/component-level breakdowns pulled directly from the actual papers (not just the totals)
@@ -762,7 +753,9 @@ function buildEnglish(){
     <br><br>
     <strong>Suggested fix:</strong> drill the ~8 common PSLE transformation patterns (as well as, relative clauses, causative "due to/because of", direct↔reported speech) as fixed templates — practice slotting new content into the same structure repeatedly until it's automatic, rather than reasoning it out fresh each time.
     <br><br>
-    In the Editing section, his misses clustered on <strong>prepositions</strong> ("on" → should be "to") and <strong>adverb formation</strong> ("softest" → should be "softly") — both are quick, drillable rules worth 10 minutes of targeted practice rather than broad grammar review. In Comprehension Cloze, several misses were near-synonyms marked wrong (e.g. "feet" where "legs" was expected) — worth practicing picking the exact word implied by context, not just a reasonable one.`;
+    In the Editing section, his misses clustered on <strong>prepositions</strong> ("on" → should be "to") and <strong>adverb formation</strong> ("softest" → should be "softly") — both are quick, drillable rules worth 10 minutes of targeted practice rather than broad grammar review. In Comprehension Cloze, several misses were near-synonyms marked wrong (e.g. "feet" where "legs" was expected) — worth practicing picking the exact word implied by context, not just a reasonable one.
+    <br><br>
+    📈 <strong>Update — Term 3 WA (Aug 2026):</strong> 22/30 (73.3%, AL5) — Grammar MCQ 8/10 (80%, strong), Comprehension 14/20 (70%, still Fair band, unchanged from March's standalone check). This paper didn't include Synthesis &amp; Transformation, so it doesn't yet confirm whether that specific drilling has landed — Grammar MCQ is encouraging, but Comprehension needs to move before this counts as a real recovery. Once the actual paper is uploaded, this section can be refreshed with a proper error analysis.`;
 
   renderTable("table-english", ["English"]);
 }
@@ -869,15 +862,6 @@ const KEY_DATES = [
   {date:"2026-10-02", label:"Children's Day (Primary schools)"}
 ];
 
-const EXAM_POLICIES = [
-  "No make-up assessments for absentees — a valid Medical Certificate (MC) is required within a day of return; letters from parents or TCM MCs are not accepted. Without a valid MC, no marks are awarded for that paper.",
-  "Late by more than 15 min (papers ≤1hr) or 30 min (papers &gt;1hr) — the student will not be allowed to sit the assessment, and no extra time is given for lateness.",
-  "Conduct grade below 'Very Good' — Karl will not be allowed to receive awards on stage, if applicable.",
-  "Full school uniform required for all End-of-Year Examinations.",
-  "Dictionary allowed for Mother Tongue / HCL Paper 1 (Composition) — must be from MOE's approved list.",
-  "Calculator required for Math Paper 2 — must be from the MOE-approved model list (e.g. Casio FX 82MS/85MS/97SG series); check the model before exam day."
-];
-
 function subjectKeyFromLabel(label){
   if(label==="English") return "eng";
   if(label==="Math") return "math";
@@ -910,24 +894,23 @@ function renderExamTable(containerId, rows){
   });
   const weekKeys = Object.keys(groups).sort();
 
-  let html = "";
+  let html = `<div class="table-scroll"><table class="data-table"><thead><tr>
+    <th>Date</th><th>Subject</th><th>Task</th><th>Duration / Marks</th><th>Components</th>
+  </tr></thead><tbody>`;
   weekKeys.forEach(wk=>{
-    html += `<div class="week-header">Week of ${weekRangeLabel(wk)}</div>`;
+    html += `<tr class="week-header-row"><td colspan="5">Week of ${weekRangeLabel(wk)}</td></tr>`;
     groups[wk].forEach(r=>{
       const k = subjectKeyFromLabel(r.subject);
-      html += `<div class="exam-card">
-        <div class="exam-card-top">
-          <span class="legend-dot" style="background:${COLORS[k]}"></span>
-          <strong>${r.subject}</strong>
-          <span class="exam-date">${fmtDate(r.date)}</span>
-        </div>
-        <div class="exam-task">${r.task}</div>
-        <div class="exam-meta">⏱ ${r.duration}</div>
-        <div class="exam-components">${r.components}</div>
-        ${r.note?`<div class="exam-meta">${r.note}</div>`:''}
-      </div>`;
+      html += `<tr>
+        <td>${fmtDate(r.date)}${r.note?`<br><span class="remark-cell">${r.note}</span>`:''}</td>
+        <td><span class="legend-dot" style="background:${COLORS[k]}"></span>${r.subject}</td>
+        <td>${r.task}</td>
+        <td>${r.duration}</td>
+        <td class="remark-cell">${r.components}</td>
+      </tr>`;
     });
   });
+  html += `</tbody></table></div>`;
   document.getElementById(containerId).innerHTML = html;
 }
 
@@ -941,8 +924,6 @@ function buildExamsTab(){
   });
   keyHtml += `</tbody></table></div>`;
   document.getElementById("table-key-dates").innerHTML = keyHtml;
-
-  document.getElementById("exam-policy-list").innerHTML = EXAM_POLICIES.map(p=>`<li style="margin-bottom:8px;">${p}</li>`).join("");
 }
 
 /* ============ INIT ============ */
